@@ -71,13 +71,15 @@ namespace Data
                     documentFilter.SupplyingRegions = dataContext.SupplyingRegions.ToList();
 
                     //Fill the supplying countries
-                    documentFilter.SupplyingCountrys = dataContext.SupplyingCountries.ToList();
+                    documentFilter.SupplyingCountries = dataContext.SupplyingCountries.ToList();
 
                     //Fill the supplier locations
                     documentFilter.SupplierLocations = dataContext.SupplierLocations.ToList();
 
                     //Fill the supplier types
                     documentFilter.SupplierTypes = dataContext.SupplierTypes.ToList();
+
+                    documentFilter.DocumentsList = new List<SupplierMandatoryDocument>();
                 }
             }
             catch

@@ -1,5 +1,7 @@
 ﻿using SupplierDocuments.Business;
+using SupplierDocuments.Entities.ViewModels;
 using System.Web.Mvc;
+using System.Collections.Generic;
 
 namespace SupplierDocuments.Controllers
 {
@@ -12,18 +14,39 @@ namespace SupplierDocuments.Controllers
 
         #endregion
 
-        public ActionResult Index1(int regionID, int supplyingCountryID, int supplierTypeID, int supplierLocationID)
+        public ActionResult Search(List<SupplierMandatoryDocument> documents)
         {
-            supplierBAL = new SupplierBAL();
+            //var documents = new List<SupplierMandatoryDocument>();
 
-            var documents = supplierBAL.GetSupplierDocuments(regionID, supplyingCountryID, supplierTypeID, supplierLocationID);
+            //if (filters != null)
+            //{
+            //    int regionID = filters.SupplyingRegionID;
+            //    int supplyingCountryID = filters.SupplyingCountryID;
+            //    int supplierTypeID = filters.SupplierTypeID;
+            //    int supplierLocationID = filters.SupplierLocationID;
 
-            return View(documents);
+            //    supplierBAL = new SupplierBAL();
+
+            //    documents = supplierBAL.GetSupplierDocuments(regionID, supplyingCountryID, supplierTypeID, supplierLocationID);
+
+            //    filters.DocumentsList = documents;
+            //}
+
+            return PartialView("Search", documents);
         }
 
-        public ActionResult Create()
+        [HttpPost]
+        public ActionResult Index(DocumentFilter documentFilters)
         {
-            return View();
+            
+            supplierBAL = new SupplierBAL();
+
+            documentFilters = supplierBAL.GetDocumentSearchFilters();
+
+            //Get the supplier documents
+            documentFilters.DocumentsList = GetSupplierDocuments(documentFilters);
+
+            return View(documentFilters);
         }
 
         public ActionResult Index()
@@ -34,7 +57,37 @@ namespace SupplierDocuments.Controllers
             var documentFilters = supplierBAL.GetDocumentSearchFilters();
             /* Ends */
 
+            
+
             return View(documentFilters);
+        }
+
+        private List<SupplierMandatoryDocument> GetSupplierDocuments(DocumentFilter filters)
+        {
+            var documents = new List<SupplierMandatoryDocument>();
+
+            try
+            {
+                if (filters != null)
+                {
+                    int regionID = filters.SupplyingRegionID1;
+                    int supplyingCountryID = filters.SupplyingCountryID1;
+                    int supplierTypeID = filters.SupplierTypeID1;
+                    int supplierLocationID = filters.SupplierLocationID1;
+
+                    supplierBAL = new SupplierBAL();
+
+                    documents = supplierBAL.GetSupplierDocuments(regionID, supplyingCountryID, supplierTypeID, supplierLocationID);
+
+                    filters.DocumentsList = documents;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+
+            return documents;
         }
     }
 }

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<SupplierDocuments.Entities.ViewModels.SupplierMandatoryDocument>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DocumentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SupplierLocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SupplierType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SupplyingCountry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SupplyingRegion)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SupplierLocation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SupplierType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SupplyingCountry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SupplyingRegion)
+        </td>
+
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>*@
+    </tr>
+}
+
+</table>
