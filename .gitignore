@@ -3,3 +3,18 @@
 ################################################################################
 
 /.vs/Git/v15/.suo
+/.vs/SupplierDocuments/v15/Server/sqlite3
+/.vs/SupplierDocuments/v15/.suo
+/.vs/slnx.sqlite
+/Business/bin/Debug
+/Business/obj
+/Data/bin/Debug
+/Data/obj
+/Entities/bin/Debug
+/Entities/obj/Debug
+/Web/bin
+/Web/obj/Debug
+/Web/_bin_deployableAssemblies
+/Web/.vs/Web/v15
+/.vs/config
+/.vs

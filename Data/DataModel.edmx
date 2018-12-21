@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="APIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Documents">
+          <Key>
+            <PropertyRef Name="DocumentID" />
+          </Key>
+          <Property Name="DocumentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocumentName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplierContacts">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="int" Nullable="false" />
+          <Property Name="SupplierID" Type="int" Nullable="false" />
+          <Property Name="ContactName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="IsPrimary" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplierDocuments">
+          <Key>
+            <PropertyRef Name="SupplierDocumentID" />
+          </Key>
+          <Property Name="SupplierDocumentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplyingRegionID" Type="int" Nullable="false" />
+          <Property Name="SupplyingCountryID" Type="int" Nullable="false" />
+          <Property Name="SupplierLocationID" Type="int" Nullable="false" />
+          <Property Name="SupplierTypeID" Type="int" Nullable="false" />
+          <Property Name="DocumentID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplierLocations">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Suppliers">
+          <Key>
+            <PropertyRef Name="SupplierID" />
+          </Key>
+          <Property Name="SupplierID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplierName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="Country" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplierTypes">
+          <Key>
+            <PropertyRef Name="SupplierTypeID" />
+          </Key>
+          <Property Name="SupplierTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplyingCountries">
+          <Key>
+            <PropertyRef Name="SupplyingCountryID" />
+          </Key>
+          <Property Name="SupplyingCountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplyingRegions">
+          <Key>
+            <PropertyRef Name="RegionID" />
+          </Key>
+          <Property Name="RegionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_SupplierContacts_SupplierContacts">
+          <End Role="SupplierContacts" Type="Self.SupplierContacts" Multiplicity="1" />
+          <End Role="SupplierContacts1" Type="Self.SupplierContacts" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SupplierContacts">
+              <PropertyRef Name="ContactID" />
+            </Principal>
+            <Dependent Role="SupplierContacts1">
+              <PropertyRef Name="ContactID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="APIModelStoreContainer">
+          <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierContacts" EntityType="Self.SupplierContacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierDocuments" EntityType="Self.SupplierDocuments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierLocations" EntityType="Self.SupplierLocations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierTypes" EntityType="Self.SupplierTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplyingCountries" EntityType="Self.SupplyingCountries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplyingRegions" EntityType="Self.SupplyingRegions" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SupplierContacts_SupplierContacts" Association="Self.FK_SupplierContacts_SupplierContacts">
+            <End Role="SupplierContacts" EntitySet="SupplierContacts" />
+            <End Role="SupplierContacts1" EntitySet="SupplierContacts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="APIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="DocumentID" />
+          </Key>
+          <Property Name="DocumentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocumentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplierContact">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="Int32" Nullable="false" />
+          <Property Name="SupplierID" Type="Int32" Nullable="false" />
+          <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsPrimary" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SupplierContacts1" Relationship="Self.FK_SupplierContacts_SupplierContacts" FromRole="SupplierContacts" ToRole="SupplierContacts1" />
+          <NavigationProperty Name="SupplierContact1" Relationship="Self.FK_SupplierContacts_SupplierContacts" FromRole="SupplierContacts1" ToRole="SupplierContacts" />
+        </EntityType>
+        <EntityType Name="SupplierDocument">
+          <Key>
+            <PropertyRef Name="SupplierDocumentID" />
+          </Key>
+          <Property Name="SupplierDocumentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplyingRegionID" Type="Int32" Nullable="false" />
+          <Property Name="SupplyingCountryID" Type="Int32" Nullable="false" />
+          <Property Name="SupplierLocationID" Type="Int32" Nullable="false" />
+          <Property Name="SupplierTypeID" Type="Int32" Nullable="false" />
+          <Property Name="DocumentID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplierLocation">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="SupplierID" />
+          </Key>
+          <Property Name="SupplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplierType">
+          <Key>
+            <PropertyRef Name="SupplierTypeID" />
+          </Key>
+          <Property Name="SupplierTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplyingCountry">
+          <Key>
+            <PropertyRef Name="SupplyingCountryID" />
+          </Key>
+          <Property Name="SupplyingCountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplyingRegion">
+          <Key>
+            <PropertyRef Name="RegionID" />
+          </Key>
+          <Property Name="RegionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_SupplierContacts_SupplierContacts">
+          <End Role="SupplierContacts" Type="Self.SupplierContact" Multiplicity="1" />
+          <End Role="SupplierContacts1" Type="Self.SupplierContact" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SupplierContacts">
+              <PropertyRef Name="ContactID" />
+            </Principal>
+            <Dependent Role="SupplierContacts1">
+              <PropertyRef Name="ContactID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBConnection" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Documents" EntityType="Self.Document" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="SupplierContacts" EntityType="Self.SupplierContact" />
+          <EntitySet Name="SupplierDocuments" EntityType="Self.SupplierDocument" />
+          <EntitySet Name="SupplierLocations" EntityType="Self.SupplierLocation" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+          <EntitySet Name="SupplierTypes" EntityType="Self.SupplierType" />
+          <EntitySet Name="SupplyingCountries" EntityType="Self.SupplyingCountry" />
+          <EntitySet Name="SupplyingRegions" EntityType="Self.SupplyingRegion" />
+          <AssociationSet Name="FK_SupplierContacts_SupplierContacts" Association="Self.FK_SupplierContacts_SupplierContacts">
+            <End Role="SupplierContacts" EntitySet="SupplierContacts" />
+            <End Role="SupplierContacts1" EntitySet="SupplierContacts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="APIModelStoreContainer" CdmEntityContainer="DBConnection">
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="APIModel.Document">
+              <MappingFragment StoreEntitySet="Documents">
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="APIModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplierContacts">
+            <EntityTypeMapping TypeName="APIModel.SupplierContact">
+              <MappingFragment StoreEntitySet="SupplierContacts">
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplierDocuments">
+            <EntityTypeMapping TypeName="APIModel.SupplierDocument">
+              <MappingFragment StoreEntitySet="SupplierDocuments">
+                <ScalarProperty Name="SupplierDocumentID" ColumnName="SupplierDocumentID" />
+                <ScalarProperty Name="SupplyingRegionID" ColumnName="SupplyingRegionID" />
+                <ScalarProperty Name="SupplyingCountryID" ColumnName="SupplyingCountryID" />
+                <ScalarProperty Name="SupplierLocationID" ColumnName="SupplierLocationID" />
+                <ScalarProperty Name="SupplierTypeID" ColumnName="SupplierTypeID" />
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplierLocations">
+            <EntityTypeMapping TypeName="APIModel.SupplierLocation">
+              <MappingFragment StoreEntitySet="SupplierLocations">
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="APIModel.Supplier">
+              <MappingFragment StoreEntitySet="Suppliers">
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplierTypes">
+            <EntityTypeMapping TypeName="APIModel.SupplierType">
+              <MappingFragment StoreEntitySet="SupplierTypes">
+                <ScalarProperty Name="SupplierTypeID" ColumnName="SupplierTypeID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplyingCountries">
+            <EntityTypeMapping TypeName="APIModel.SupplyingCountry">
+              <MappingFragment StoreEntitySet="SupplyingCountries">
+                <ScalarProperty Name="SupplyingCountryID" ColumnName="SupplyingCountryID" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplyingRegions">
+            <EntityTypeMapping TypeName="APIModel.SupplyingRegion">
+              <MappingFragment StoreEntitySet="SupplyingRegions">
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
