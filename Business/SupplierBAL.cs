@@ -18,7 +18,7 @@ namespace SupplierDocuments.Business
 
         #region Get Mandatory Documents
 
-        public List<SupplierMandatoryDocument> GetSupplierDocuments(int regionID, int supplyingCountryID, int supplierTypeID, int supplierLocationID)
+        public List<SupplierMandatoryDocument> GetSupplierDocuments(DocumentFilter documentFilter)
         {
             List<SupplierMandatoryDocument> documents = null;
 
@@ -26,7 +26,7 @@ namespace SupplierDocuments.Business
             {
                 supplierDAL = new SupplierDAL();
 
-                documents = supplierDAL.GetSupplierDocuments(regionID, supplyingCountryID, supplierTypeID, supplierLocationID);
+                documents = supplierDAL.GetSupplierDocuments(documentFilter);
             }
             catch
             {

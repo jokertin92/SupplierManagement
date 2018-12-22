@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "Supplier", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -15,45 +15,42 @@
         <div class="form-group">
             @Html.LabelFor(model => model.SupplyingRegions, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.SupplyingRegionID1, new SelectList(Model.SupplyingRegions, "RegionID", "RegionName")
-, htmlAttributes: new { @class = "form-control", id = "SupplyingRegions", name= "SupplyingRegions" })
+                @Html.DropDownListFor(m => m.SupplyingRegionID, new SelectList(Model.SupplyingRegions, "RegionID", "RegionName")
+                    , htmlAttributes: new { @class = "form-control", id = "SupplyingRegions", name= "SupplyingRegions" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.SupplyingCountries, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.DropDownListFor(m => m.SupplyingCountryID, new SelectList(Model.SupplyingCountries, "SupplyingCountryID", "CountryName")
-, htmlAttributes: new { @class = "form-control", id = "SupplyingCountries", name= "SupplyingCountrys" })*@
-
-                @Html.DropDownListFor(m=>m.SupplyingCountryID1, new SelectList(Model.SupplyingCountries, "SupplyingCountryID", "CountryName"))
-
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.SupplierLocations, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.SupplierLocationID1, new SelectList(Model.SupplierLocations, "CountryID", "CountryName")
-, htmlAttributes: new { @class = "form-control", id = "SupplierLocations", name = "SupplierLocations" })
+                @Html.DropDownListFor(m => m.SupplyingCountryID, new SelectList(Model.SupplyingCountries, "CountryID", "CountryName")
+                    , htmlAttributes: new { @class = "form-control", id = "SupplyingCountries", name= "SupplyingCountrys" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.SupplierTypes, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.SupplierTypeID1, new SelectList(Model.SupplierTypes, "SupplierTypeID", "TypeName")
-, htmlAttributes: new { @class = "form-control", id = "SupplierTypes", name= "SupplierTypes" })
+                @Html.DropDownListFor(m => m.SupplierTypeID, new SelectList(Model.SupplierTypes, "SupplierTypeID", "TypeName")
+                    , htmlAttributes: new { @class = "form-control", id = "SupplierTypes", name= "SupplierTypes" })
             </div>
         </div>
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.SupplierLocations, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.SupplierLocationID, new SelectList(Model.SupplierLocations, "CountryID", "CountryName")
+                    , htmlAttributes: new { @class = "form-control", id = "SupplierLocations", name = "SupplierLocations" })
+            </div>
+        </div>
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Search" class="btn btn-primary" />
+                <input type="button" value="Refresh" class="btn btn-default" onclick="window.location.href = '/Supplier/Index';" />
             </div>
         </div>
     </div>
-
-    <div id="divGrid">
-        @Html.Partial("Search", Model.DocumentsList)
+    
+    <div style="margin-top: 40px;">
+        @Html.Partial("_Search", Model.DocumentsList)
     </div>
 }

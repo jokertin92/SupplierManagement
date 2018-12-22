@@ -6,15 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="3b35de19f7f0456e94cd069420f58a59" Name="Diagram1">
         <EntityTypeShape EntityType="APIModel.Document" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="APIModel.Product" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="APIModel.SupplierContact" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="APIModel.SupplierDocument" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="APIModel.SupplierLocation" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="APIModel.Supplier" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="APIModel.SupplierType" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="APIModel.SupplyingCountry" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="APIModel.SupplyingRegion" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="APIModel.FK_SupplierContacts_SupplierContacts" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="APIModel.Country" Width="1.5" PointX="5.375" PointY="7.75" />
+        <EntityTypeShape EntityType="APIModel.Region" Width="1.5" PointX="7.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

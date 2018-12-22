@@ -12,9 +12,14 @@ namespace SupplierDocuments.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class Region
     {
-        public int ProductID { get; set; }
-        public string ProductName { get; set; }
+        public int RegionID { get; set; }
+        public string RegionName { get; set; }
+        public Nullable<int> StatusID { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public Nullable<int> ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedOn { get; set; }
     }
 }

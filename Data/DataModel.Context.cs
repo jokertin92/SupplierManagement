@@ -26,13 +26,9 @@ namespace SupplierDocuments.Entities
         }
     
         public virtual DbSet<Document> Documents { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<SupplierContact> SupplierContacts { get; set; }
         public virtual DbSet<SupplierDocument> SupplierDocuments { get; set; }
-        public virtual DbSet<SupplierLocation> SupplierLocations { get; set; }
-        public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<SupplierType> SupplierTypes { get; set; }
-        public virtual DbSet<SupplyingCountry> SupplyingCountries { get; set; }
-        public virtual DbSet<SupplyingRegion> SupplyingRegions { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Region> Regions { get; set; }
     }
 }

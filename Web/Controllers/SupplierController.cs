@@ -14,53 +14,51 @@ namespace SupplierDocuments.Controllers
 
         #endregion
 
-        public ActionResult Search(List<SupplierMandatoryDocument> documents)
-        {
-            //var documents = new List<SupplierMandatoryDocument>();
-
-            //if (filters != null)
-            //{
-            //    int regionID = filters.SupplyingRegionID;
-            //    int supplyingCountryID = filters.SupplyingCountryID;
-            //    int supplierTypeID = filters.SupplierTypeID;
-            //    int supplierLocationID = filters.SupplierLocationID;
-
-            //    supplierBAL = new SupplierBAL();
-
-            //    documents = supplierBAL.GetSupplierDocuments(regionID, supplyingCountryID, supplierTypeID, supplierLocationID);
-
-            //    filters.DocumentsList = documents;
-            //}
-
-            return PartialView("Search", documents);
-        }
+        #region Post Method
 
         [HttpPost]
         public ActionResult Index(DocumentFilter documentFilters)
-        {
-            
-            supplierBAL = new SupplierBAL();
-
-            documentFilters = supplierBAL.GetDocumentSearchFilters();
-
+        {            
             //Get the supplier documents
             documentFilters.DocumentsList = GetSupplierDocuments(documentFilters);
+
+            /* Rebind the dropdowns */
+            var filter = GetDropDownFilterItems();
+
+            documentFilters.SupplyingRegions = filter.SupplyingRegions;
+            documentFilters.SupplyingCountries= filter.SupplyingCountries;
+            documentFilters.SupplierLocations = filter.SupplierLocations;
+            documentFilters.SupplierTypes = filter.SupplierTypes;
+            /* Ends */
 
             return View(documentFilters);
         }
 
+        #endregion
+
+        #region Get Method
+
+        [HttpGet]
         public ActionResult Index()
         {
+            //Clear the session
+            Session["Filters"] = null;
+
             /* Get the viewmodel required to fill the search fiels */
             supplierBAL = new SupplierBAL();
 
             var documentFilters = supplierBAL.GetDocumentSearchFilters();
             /* Ends */
 
-            
+            //Fill the dropdown filters into the session
+            Session["Filters"] = documentFilters;
 
             return View(documentFilters);
         }
+
+        #endregion
+
+        #region Get Supplier Documents
 
         private List<SupplierMandatoryDocument> GetSupplierDocuments(DocumentFilter filters)
         {
@@ -70,16 +68,9 @@ namespace SupplierDocuments.Controllers
             {
                 if (filters != null)
                 {
-                    int regionID = filters.SupplyingRegionID1;
-                    int supplyingCountryID = filters.SupplyingCountryID1;
-                    int supplierTypeID = filters.SupplierTypeID1;
-                    int supplierLocationID = filters.SupplierLocationID1;
-
                     supplierBAL = new SupplierBAL();
 
-                    documents = supplierBAL.GetSupplierDocuments(regionID, supplyingCountryID, supplierTypeID, supplierLocationID);
-
-                    filters.DocumentsList = documents;
+                    documents = supplierBAL.GetSupplierDocuments(filters);
                 }
             }
             catch
@@ -89,5 +80,34 @@ namespace SupplierDocuments.Controllers
 
             return documents;
         }
+
+        #endregion
+
+        #region Get Dropdown Filters
+
+        private DocumentFilter GetDropDownFilterItems()
+        {
+            var documentFilters = new DocumentFilter();
+            
+            if (Session["Filters"] != null)
+            {
+                documentFilters = Session["Filters"] as DocumentFilter;
+            }
+            else
+            {
+                /* Get the viewmodel required to fill the search fiels */
+                supplierBAL = new SupplierBAL();
+
+                documentFilters = supplierBAL.GetDocumentSearchFilters();
+                /* Ends */
+
+                //Keep the filters in session for rebinding
+                Session["Filters"] = documentFilters;
+            }
+
+            return documentFilters;
+        }
+
+        #endregion
     }
 }

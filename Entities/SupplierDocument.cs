@@ -20,5 +20,10 @@ namespace SupplierDocuments.Entities
         public int SupplierLocationID { get; set; }
         public int SupplierTypeID { get; set; }
         public int DocumentID { get; set; }
+        public Nullable<int> StatusID { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public Nullable<int> ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedOn { get; set; }
     }
 }

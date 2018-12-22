@@ -10,19 +10,21 @@ namespace SupplierDocuments.Entities.ViewModels
 {
     public class DocumentFilter
     {
-        public int SupplyingRegionID1 { get; set; }
-        public int SupplyingCountryID1 { get; set; }
-        public int SupplierLocationID1 { get; set; }
-        public int SupplierTypeID1 { get; set; }
+        /* Properties that hold dropdown's selected value */
+        public int SupplyingRegionID { get; set; }
+        public int SupplyingCountryID { get; set; }
+        public int SupplierLocationID { get; set; }
+        public int SupplierTypeID { get; set; }
+        /* End */
 
         [DisplayName("Supplying Region")]
-        public List<SupplyingRegion> SupplyingRegions { get; set; }
+        public List<Region> SupplyingRegions { get; set; }
 
         [DisplayName("Supplying Country")]
-        public List<SupplyingCountry> SupplyingCountries { get; set; }
+        public List<Country> SupplyingCountries { get; set; }
 
         [DisplayName("Supplier Location")]
-        public List<SupplierLocation> SupplierLocations { get; set; }
+        public List<Country> SupplierLocations { get; set; }
 
         [DisplayName("Supplier Type")]
         public List<SupplierType> SupplierTypes { get; set; }
