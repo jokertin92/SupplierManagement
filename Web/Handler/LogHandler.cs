@@ -18,17 +18,24 @@ namespace SupplierDocuments.Handler
 
         private void Context_BeginRequest(object sender, EventArgs e)
         {
-            var requestContext = HttpContext.Current.Request;
-
-            /* Log the request details */
-            var httpMethod = requestContext.HttpMethod;
-
-            //Check if the http method is supposed to be logged
-            var canLog = Enum.GetNames(typeof(HttpMethods)).Contains(httpMethod);
-
-            if (canLog)
+            try
             {
-                var logContext = requestContext.FilePath;
+                var requestContext = HttpContext.Current.Request;
+
+                /* Log the request details */
+                var httpMethod = requestContext.HttpMethod;
+
+                //Check if the http method is supposed to be logged
+                var canLog = Enum.GetNames(typeof(HttpMethods)).Contains(httpMethod);
+
+                if (canLog)
+                {
+                    var logContext = requestContext.FilePath;
+                }
+            }
+            catch
+            {
+                //Handling the exceptions specific to the logger module
             }
         }
 
